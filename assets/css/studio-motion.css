@@ -1,0 +1,30 @@
+/* Use the studio's own type throughout the index and its transitions. */
+.site-header.index-ready {display:flex;flex-direction:row;align-items:center;justify-content:space-between}
+.site-header.index-ready > nav{display:none}
+.index-toggle{border:0;background:none;color:inherit;font:600 12px var(--font-subtitle);letter-spacing:.07em;cursor:pointer;min-height:38px;padding:0 4px}
+.site-header.index-ready{padding-block:16px}
+.studio-index{position:fixed;inset:0;width:100%;max-width:none;height:100%;max-height:none;margin:0;border:0;box-sizing:border-box;padding:16px 4vw 5vh;background:#251e1d;color:var(--paper);overflow:auto}
+.studio-index::backdrop{background:#251e1d66}
+body:has(.studio-index[open]){overflow:hidden}
+.index-top{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #f5f1e94a;padding-bottom:16px}
+.studio-index .wordmark,.studio-index a{color:inherit}
+.studio-index nav{display:grid;gap:0;margin:clamp(28px,7vh,85px) 0 0;width:min(1080px,100%);font:500 clamp(45px,min(8vw,13vh),122px)/1.04 var(--font-display)}
+.studio-index nav a{display:flex;align-items:baseline;gap:clamp(14px,3vw,55px);padding:.08em 0;border-bottom:1px solid #f5f1e94a;text-decoration:none;letter-spacing:-.04em}
+.studio-index nav a::before{content:attr(data-number);font:500 12px var(--font-subtitle);letter-spacing:.06em;color:#dfc8ae}
+.studio-index a:focus-visible,.index-toggle:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+@media(prefers-reduced-motion:no-preference){
+.studio-index[open]{animation:studio-draw .42s cubic-bezier(.16,.76,.25,1) both}
+.studio-index[open] nav a{animation:index-rise .48s cubic-bezier(.16,.8,.2,1) both;animation-delay:calc(90ms + var(--order)*45ms)}
+@keyframes studio-draw{from{clip-path:polygon(0 0,100% 0,100% 0,0 0)}to{clip-path:polygon(0 0,100% 0,100% 135%,0 100%)}}
+@keyframes index-rise{from{opacity:0;transform:translateY(.35em)}to{opacity:1;transform:none}}
+@supports(animation-timeline:view()){
+.site-footer .contact-title{transform-origin:left bottom;animation:colophon linear both;animation-timeline:view();animation-range:entry 0% entry 100%}
+@keyframes colophon{from{transform:scaleY(.68);clip-path:inset(65% 0 0 0)}to{transform:none;clip-path:inset(0 0 -12% 0)}}
+}
+@media(hover:hover){.studio-index nav a,.folio-print img,.series-plates img{transition:transform .33s ease}.studio-index nav a:hover{transform:translateX(8px)}.folio-link:hover img,.series-plates a:hover img{transform:scale(.98)}}
+}
+@view-transition{navigation:auto}
+@media(prefers-reduced-motion:no-preference){::view-transition-new(root){animation:studio-draw .39s cubic-bezier(.25,.75,.25,1) both}::view-transition-old(root){animation:none}}
+@media(prefers-reduced-motion:reduce){::view-transition-group(*),::view-transition-new(*),::view-transition-old(*){animation:none!important}}
+.site-header .language-toggle{margin-inline-start:auto;margin-inline-end:clamp(12px,2vw,32px);font:500 13px var(--font-subtitle);letter-spacing:.02em;text-underline-offset:.32em;text-decoration:underline}
+html[lang=zh-CN] .type-opening h1{letter-spacing:-.035em;line-height:1.02}html[lang=zh-CN] .type-opening h1 i{font-style:normal}
